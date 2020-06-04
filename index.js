@@ -55,4 +55,5 @@ app.post("/addHome", (req, res) => {
   });
 
 const port = process.env.PORT || 4200;
-app.listen(4200, () => console.log('Listening to post 4200'));
+app.listen(port, () => { console.log("Listening at port 4200");
+});
