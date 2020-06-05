@@ -9,11 +9,10 @@ require('dotenv').config();
 
 const uri = process.env.DB_PATH;
 
-//database 
 
 const MongoClient = require('mongodb').MongoClient;
 
-
+let   client = new MongoClient(uri, { useNewUrlParser: true });
 app.post("/addHome", (req, res) => {
     const experiences = req.body;
     client = new MongoClient(uri, { useNewUrlParser: true });
