@@ -50,6 +50,42 @@ app.post("/addHome", (req, res) => {
     });
   });
 
+  app.post("/addHome", (req, res) => {
+    const homes = req.body;
+    client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect((error) => {
+      const collection = client.db("air-cnc").collection("homes");
+      collection.insert(experiences, (err, result) => {
+        if (err) {
+          console.log(err);
+          console.log(error)
+          res.status(500).send({ message: err });
+        } else {
+          res.send(result.ops[0]);
+        }
+      });
+      client.close();
+    });
+  });
+
+  app.get("/homes", (req, res) => {
+    //const category = req.params.category;
+    client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect((error) => {
+      const collection = client.db("air-cnc").collection("homes");
+      collection.find().toArray((err, documents) => {
+        if (err) {
+          console.log(err);
+          console.log(error)
+          res.status(500).send({ message: err });
+        } else {
+          res.send(documents);
+        }
+      });
+      client.close();
+    });
+  });
+
   
   
   app.get("/", (req, res) => {
