@@ -32,9 +32,8 @@ app.post("/addHome", (req, res) => {
     });
   });
 
-  
   app.get("/experiences", (req, res) => {
-    //const category = req.params.category;
+   
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
       const collection = client.db("air-cnc").collection("experiences");
