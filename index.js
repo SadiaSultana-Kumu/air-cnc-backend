@@ -15,11 +15,11 @@ const MongoClient = require('mongodb').MongoClient;
 
 
 app.post("/addHome", (req, res) => {
-    const homes = req.body;
+    const experiences = req.body;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
-      const collection = client.db("air-cnc").collection("homes");
-      collection.insert(homes, (err, result) => {
+      const collection = client.db("air-cnc").collection("experiences");
+      collection.insert(experiences, (err, result) => {
         if (err) {
           console.log(err);
           console.log(error)
@@ -32,11 +32,11 @@ app.post("/addHome", (req, res) => {
     });
   });
 
-  app.get("/homes", (req, res) => {
+  app.get("/experiences", (req, res) => {
     //const category = req.params.category;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
-      const collection = client.db("air-cnc").collection("homes");
+      const collection = client.db("air-cnc").collection("experiences");
       collection.find().toArray((err, documents) => {
         if (err) {
           console.log(err);
@@ -50,44 +50,7 @@ app.post("/addHome", (req, res) => {
     });
   });
 
-  app.get('/homes/:key', (req, res) =>{
-    const key = req.params.key;    
-    
-    client = new MongoClient(uri, { useNewUrlParser: true });
-    client.connect(err => {
-        const collection = client.db("air-cnc").collection("homes");
-        collection.find({key}).toArray((err, documents)=>{
-            if(err){
-                console.log(err)
-                res.status(500).send({message:err});
-            }
-            else{
-                res.send(documents[0]);
-            }
-        });
-        client.close();
-      });
-});
-
-app.post('/getHomesByKey', (req, res) =>{
-    const key = req.params.key;
-    const productKeys = req.body;
-    client = new MongoClient(uri, { useNewUrlParser: true });
-    client.connect(err => {
-        const collection = client.db("air-cnc").collection("homes");
-        collection.find({key: { $in: productKeys }}).toArray((err, documents)=>{
-            if(err){
-                console.log(err)
-                res.status(500).send({message:err});
-            }
-            else{
-                res.send(documents);
-            }
-        });
-        client.close();
-      });
-});
-
+  
   
   app.get("/", (req, res) => {
     res.send("<h1>air-cnc Server</h1>");
