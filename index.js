@@ -67,7 +67,6 @@ app.post("/addHome", (req, res) => {
       client.close();
     });
   });
-
   app.get("/homes", (req, res) => {
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
