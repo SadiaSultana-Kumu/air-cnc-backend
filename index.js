@@ -27,7 +27,7 @@ app.post("/addHome", (req, res) => {
           res.send(result.ops[0]);
         }
       });
-      client.close();
+      
     });
   });
 
@@ -45,7 +45,7 @@ app.post("/addHome", (req, res) => {
           res.send(documents);
         }
       });
-      client.close();
+      
     });
   });
 
@@ -63,7 +63,7 @@ app.post("/addHome", (req, res) => {
           res.send(result.ops[0]);
         }
       });
-      client.close();
+     
     });
   });
   app.get("/homes", (req, res) => {
@@ -79,7 +79,7 @@ app.post("/addHome", (req, res) => {
           res.send(documents);
         }
       });
-      client.close();
+     
     });
   });
 
