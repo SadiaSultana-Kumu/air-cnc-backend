@@ -32,6 +32,7 @@ app.post("/addHome", (req, res) => {
     });
   });
 
+  
   app.get("/experiences", (req, res) => {
     //const category = req.params.category;
     client = new MongoClient(uri, { useNewUrlParser: true });
