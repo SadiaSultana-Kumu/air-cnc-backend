@@ -68,7 +68,7 @@ app.get("/homeRules", (req, res) => {
   });
 });
 
-app.get("/homeDetails/:key", (req, res) => {
+app.get("/homeDetails", (req, res) => {
   const key = req.params.key;
     const homeKeys = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
