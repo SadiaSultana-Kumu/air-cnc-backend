@@ -69,11 +69,12 @@ app.get("/homeRules", (req, res) => {
 });
 
 app.get("/homeDetails/:key", (req, res) => {
+  const key = req.params.key;
+    const homeKeys = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
     const collection = client.db("air-cnc").collection("homeDetails");
-    const key = Number(req.params.key);
-    collection.find({key}).toArray((err, documents)=>{
+    collection.find({key: { $in: homeKeys }}).toArray((err, documents)=>{
       if(err){
           console.log(err)
           res.status(500).send({message:err});
