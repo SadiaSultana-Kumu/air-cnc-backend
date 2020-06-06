@@ -50,7 +50,7 @@ app.get("/homeRules", (req, res) => {
   });
 });
 
-app.post("/addHome", (req, res) => {
+ app.post("/addHome", (req, res) => {
   const homeDetails = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
@@ -156,7 +156,6 @@ app.post("/addHome", (req, res) => {
   });
 
 
-  
   app.get("/", (req, res) => {
     res.send("<h1>air-cnc Server</h1>");
   });
