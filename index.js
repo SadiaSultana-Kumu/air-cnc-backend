@@ -13,12 +13,13 @@ const uri = process.env.DB_PATH;
 const MongoClient = require('mongodb').MongoClient;
 
 let   client = new MongoClient(uri, { useNewUrlParser: true });
+
 app.post("/addHome", (req, res) => {
-  const experiences = req.body;
+  const homeRules = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
-    const collection = client.db("air-cnc").collection("experiences");
-    collection.insert(experiences, (err, result) => {
+    const collection = client.db("air-cnc").collection("homeRules");
+    collection.insert(homeRules, (err, result) => {
       if (err) {
         console.log(err);
         console.log(error)
@@ -31,11 +32,11 @@ app.post("/addHome", (req, res) => {
   });
 });
 
-app.get("/experiences", (req, res) => {
+app.get("/homeRules", (req, res) => {
  
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
-    const collection = client.db("air-cnc").collection("experiences");
+    const collection = client.db("air-cnc").collection("homeRules");
     collection.find().toArray((err, documents) => {
       if (err) {
         console.log(err);
@@ -49,7 +50,43 @@ app.get("/experiences", (req, res) => {
   });
 });
 
-  app.post("/addHome", (req, res) => {
+app.post("/addHome", (req, res) => {
+  const homeDetails = req.body;
+  client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect((error) => {
+    const collection = client.db("air-cnc").collection("homeDetails");
+    collection.insert(homeDetails, (err, result) => {
+      if (err) {
+        console.log(err);
+        console.log(error)
+        res.status(500).send({ message: err });
+      } else {
+        res.send(result.ops[0]);
+      }
+    });
+    
+  });
+});
+
+app.get("/homeDetails", (req, res) => {
+ 
+  client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect((error) => {
+    const collection = client.db("air-cnc").collection("homeDetails");
+    collection.find().toArray((err, documents) => {
+      if (err) {
+        console.log(err);
+        console.log(error)
+        res.status(500).send({ message: err });
+      } else {
+        res.send(documents);
+      }
+    });
+    
+  });
+}); 
+
+app.post("/addHome", (req, res) => {
     const homes = req.body;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
@@ -66,6 +103,7 @@ app.get("/experiences", (req, res) => {
      
     });
   });
+
   app.get("/homes", (req, res) => {
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
@@ -82,7 +120,42 @@ app.get("/experiences", (req, res) => {
     });
   });
 
-  
+
+
+app.post("/addHome", (req, res) => {
+    const experiences = req.body;
+    client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect((error) => {
+      const collection = client.db("air-cnc").collection("experiences");
+      collection.insert(experiences, (err, result) => {
+        if (err) {
+          console.log(err);
+          console.log(error)
+          res.status(500).send({ message: err });
+        } else {
+          res.send(result.ops[0]);
+        }
+      });
+     
+    });
+  });
+  app.get("/experiences", (req, res) => {
+    client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect((error) => {
+      const collection = client.db("air-cnc").collection("experiences");
+      collection.find().toArray((err, documents) => {
+        if (err) {
+          console.log(err);
+          console.log(error)
+          res.status(500).send({ message: err });
+        } else {
+          res.send(documents);
+        }
+      });
+    });
+  });
+
+
   
   app.get("/", (req, res) => {
     res.send("<h1>air-cnc Server</h1>");
