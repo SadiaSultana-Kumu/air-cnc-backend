@@ -73,18 +73,17 @@ app.get("/homeDetails/:key", (req, res) => {
   client.connect((error) => {
     const collection = client.db("air-cnc").collection("homeDetails");
     const key = Number(req.params.key);
-    collection.find({key}).toArray((err, documents) => {
-      if (err) {
-        console.log(err);
-        console.log(error)
-        res.status(500).send({ message: err });
-      } else {
-        res.send(documents);
+    collection.find({key: { $in: productKeys }}).toArray((err, documents)=>{
+      if(err){
+          console.log(err)
+          res.status(500).send({message:err});
       }
-    });
-    
+      else{
+          res.send(documents);
+      }
   });
-}); 
+});
+});
 
 app.post("/addHome", (req, res) => {
     const homes = req.body;
