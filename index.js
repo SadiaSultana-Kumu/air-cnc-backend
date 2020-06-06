@@ -68,7 +68,7 @@ app.get("/homeRules", (req, res) => {
   });
 });
 
-app.get("/homeDetails/:key", (req, res) => {
+app.get("/homeDetails/key:key", (req, res) => {
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
     const collection = client.db("air-cnc").collection("homeDetails");
