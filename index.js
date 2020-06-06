@@ -14,7 +14,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 let   client = new MongoClient(uri, { useNewUrlParser: true });
 
-app.post("/addHome", (req, res) => {
+ app.post("/addHome", (req, res) => {
   const homeRules = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
