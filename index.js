@@ -52,6 +52,8 @@ app.get("/homeRules", (req, res) => {
 
  app.post("/addHome", (req, res) => {
   const homeDetails = req.body;
+  const key = req.params.key;
+  const homeKeys = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
     const collection = client.db("air-cnc").collection("homeDetails");
@@ -68,22 +70,41 @@ app.get("/homeRules", (req, res) => {
   });
 });
 
-app.get("/homeDetails", (req, res) => {
+app.post('/homeDetails', (req, res) =>{
   const key = req.params.key;
   const homeKeys = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
-  client.connect((error) => {
-    const collection = client.db("air-cnc").collection("homeDetails");
-    collection.find({key: { $in: homeKeys }}).toArray((err, documents)=>{
-      if(err){
-          console.log(err)
-          res.status(500).send({message:err});
-      }
-      else{
-          res.send(documents);
-      }
-  });
+  client.connect(err => {
+      const collection = client.db("air-cnc").collection("homeDetails");
+      collection.find({key: { $in: homeKeys }}).toArray((err, documents)=>{
+          if(err){
+              console.log(err)
+              res.status(500).send({message:err});
+          }
+          else{
+              res.send(documents);
+          }
+      });
+     
+    });
 });
+
+app.get('/homeDetails/:key', (req, res) =>{
+  const key = req.params.key;    
+  client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect(err => {
+      const collection = client.db("air-cnc").collection("homeDetails");
+      collection.find({key}).toArray((err, documents)=>{
+          if(err){
+              console.log(err)
+              res.status(500).send({message:err});
+          }
+          else{
+              res.send(documents[0]);
+          }
+      });
+      
+    });
 });
 
  app.post("/addHome", (req, res) => {
