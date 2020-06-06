@@ -88,7 +88,6 @@ app.post('/homeDetails', (req, res) =>{
      
     });
 });
-
 app.get('/homeDetails/:key', (req, res) =>{
   const key = req.params.key;    
   client = new MongoClient(uri, { useNewUrlParser: true });
