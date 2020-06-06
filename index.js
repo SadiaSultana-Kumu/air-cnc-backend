@@ -14,7 +14,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 let   client = new MongoClient(uri, { useNewUrlParser: true });
 
- /*app.post("/addHome", (req, res) => {
+ app.post("/addHome", (req, res) => {
   const homeRules = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
@@ -49,7 +49,7 @@ app.get("/homeRules", (req, res) => {
     
   });
 });
-*/
+
  app.post("/addHome", (req, res) => {
   const homeDetails = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
@@ -68,7 +68,7 @@ app.get("/homeRules", (req, res) => {
   });
 });
 
-app.get("/homeDetails/:key", (req, res) => {
+app.get("/homeDetails", (req, res) => {
   const key = req.params.key;
   const homeKeys = req.body;
   client = new MongoClient(uri, { useNewUrlParser: true });
@@ -86,7 +86,7 @@ app.get("/homeDetails/:key", (req, res) => {
 });
 });
 
- /* app.post("/addHome", (req, res) => {
+ app.post("/addHome", (req, res) => {
     const homes = req.body;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect((error) => {
@@ -154,7 +154,7 @@ app.post("/addHome", (req, res) => {
       });
     });
   });
-*/
+
 
   app.get("/", (req, res) => {
     res.send("<h1>air-cnc Server</h1>");
