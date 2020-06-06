@@ -68,7 +68,7 @@ app.post("/addHome", (req, res) => {
   });
 });
 
-app.get("/homeDetails", (req, res) => {
+app.get("/homeDetails/:key", (req, res) => {
  
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
