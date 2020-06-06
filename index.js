@@ -72,8 +72,8 @@ app.get("/homeDetails/:key", (req, res) => {
  
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((error) => {
-    const collection = client.db("air-cnc").collection.find({key});
-    collection.find().toArray((err, documents) => {
+    const collection = client.db("air-cnc").collection.find("homeDetails");
+    collection.find({key}).toArray((err, documents) => {
       if (err) {
         console.log(err);
         console.log(error)
